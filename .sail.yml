@@ -1,19 +1,11 @@
 tasks:
-  install:
-    image: sailci/pulumi:node-11-pulumi-0.16.3
-    command:
-      - npm install
-    when: \/heads\/master$
   infrastructure:
-    image: sailci/pulumi:node-11-pulumi-0.16.3
+    image: sailci/pulumi:node-10-pulumi-0.16.3
     command:
-      - pulumi
+      - bash
+      - -c
     args:
-      - update
-      - --stack
-      - gcp-javascript-dev
-      - --skip-preview
-      - -y
+      - npm install && pulumi update --stack jonsharratt/pulumi-example --skip-preview -y
     when: \/heads\/master$
     env:
       - PULUMI_ACCESS_TOKEN
